@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<style>
+	*{
+		padding: 0;
+		margin: 0;
+	}
+    #small-pic{
+    	width: 240px;
+    	height: 320px;
+    	float: left;
+    } 
+    #small-img{
+    	width: 240px;
+    	height: 320px;
+    }
+    #drag{
+    	width: 48px;
+    	height: 64px;
+    	position: absolute;
+    	background: #ccc;
+    	top: 0;
+    	left: 0;
+    	z-index: 1;
+    	opacity: 0.7;
+    	filter: alpha(opacity=70);
+    	display: none;
+
+    }
+    #big-pic{
+    	width: 480px;
+    	height: 640px;
+    	overflow: hidden;
+    	float: left;
+    	display: none;
+    	position: relative;
+    }
+    #big-img{
+    	width: 960px;
+    	height: 1280px;
+    	position: absolute;
+    	top: 0;
+    	left: 0;
+    }
+    #mask{
+    	width: 240px;
+    	height: 320px;
+    	position: absolute;
+    	top: 0;
+    	left: 0;
+    	opacity: 0;
+    	filter: alpha(opacity=0);
+    	z-index: 2;
+    	background: yellow;
+	</style>
+</head>
+<body>
+	<div id="small-pic">
+		<img src="img/4.jpg" id="small-img">
+		<div id="mask"></div>
+		<div id="drag"></div>
+	</div>
+	<div id="big-pic">
+			<img src="img/4.jpg" id="big-img">
+	</div>
+	<script>
+	var oSmallPic=document.getElementById('small-pic');
+	var oSmallImg=document.getElementById('small-img');
+	var oBigPic=document.getElementById('big-pic');
+	var oBigImg=document.getElementById('big-img');
+	var oDrag=document.getElementById('drag');
+	var oMask=document.getElementById('mask');
+	oSmallPic.onmouseover=function(){
+		oBigPic.style.display='block';
+		oDrag.style.display='block';
+	};
+	oSmallPic.onmouseout=function(){
+		oBigPic.style.display='none';
+		oDrag.style.display='none';
+	}; 
+	oSmallPic.onmousemove=function(e){
+		e=e||event;
+		var left=e.clientX-oDrag.offsetWidth/2;
+		var top=e.clientY-oDrag.offsetHeight/2;
+		if(left>=oSmallPic.offsetWidth-oDrag.offsetWidth){
+			left=oSmallPic.offsetWidth-oDrag.offsetWidth;
+		}
+		if(left<=0){
+			left=0;
+		}
+		if(top>=oSmallPic.offsetHeight-oDrag.offsetHeight){
+			top=oSmallPic.offsetHeight-oDrag.offsetHeight;
+		}
+		if(top<=0){
+			top=0;
+		}
+		oDrag.style.left=left+'px';
+		oDrag.style.top=top+'px';
+		var aleft=(left)/(oSmallPic.offsetWidth-oDrag.offsetWidth);
+		var aright=(top)/(oSmallPic.offsetHeight-oDrag.offsetHeight);
+		oBigImg.style.left=-aleft*(oBigImg.offsetWidth-oBigPic.offsetWidth)+'px';
+		oBigImg.style.top=-aright*(oBigImg.offsetHeight-oBigPic.offsetHeight)+'px';
+};
+	</script>
+</body>
+</html>

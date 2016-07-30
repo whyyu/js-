@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<style>
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	#div1{
+		height: 200px;
+		width: 300px;
+		background: red;
+		position: fixed;
+		left: -150px;
+		top: 200px;
+	}
+	#div2{
+		height: 200px;
+		width: 150px;
+		background: yellow;
+		line-height: 200px;
+		text-align: center;
+		position: absolute;
+		top: 0;
+		left: 150px;
+	}
+	</style>
+</head>
+<body>
+<div id="div1">
+	<div id="div2">联系我们</div>
+</div>
+<script>
+	var oDiv1=document.getElementById('div1');
+	var oDiv2=document.getElementById('div2');
+	var a;
+	oDiv1.onmouseover=function(){
+		clearInterval(a);
+		 a=setInterval(function(){
+			if(oDiv1.offsetLeft>0){
+				clearInterval(a);
+			}
+			else{
+			oDiv1.style.left=oDiv1.offsetLeft+10+'px';
+			}
+		},30);
+	};
+	oDiv1.onmouseout=function(){
+		clearInterval(a);
+		 a=setInterval(function(){
+			if(oDiv1.offsetLeft<-150){
+				clearInterval(a);
+			}
+			else{
+			oDiv1.style.left=oDiv1.offsetLeft-10+'px';
+			}
+		},30);
+	};
+</script>
+</body>
+</html>

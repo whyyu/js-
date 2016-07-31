@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title></title>
+	<meta charset ="utf-8">
+</head>
+<body>
+<input type='text' id='wenben' value='请输入关键字'>
+<script>
+	var oWb=document.getElementById('wenben');
+	oWb.style.color='#ccc';
+	oWb.onfocus=function(){
+		if(oWb.value=="请输入关键字"){
+			oWb.value="";
+		}
+		else{
+		oWb.style.color='#000';
+	}
+	};
+	oWb.onblur=function(){
+		if(oWb.value==""){
+			oWb.value='请输入关键字';
+			oWb.style.color='#ccc';
+		}
+		else{
+			oWb.style.color='#000';
+		}
+	};
+</script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<style>
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	ul{
+		list-style: none;
+	}
+	#contain{
+		position: relative;
+		margin: 200px auto;
+		width: 963px;
+		height: 900px;
+	}
+	#imgs{
+		width: 963px;
+		height: 900px;
+
+	}
+	#imgs img{
+		width: 963px;
+		height: 900px;
+		display: none;
+	}
+	#imgs .img1{
+		display: block;
+	}
+	#tab {
+		width: 90px;
+		height: 30px;
+		position: absolute;
+		bottom: 10px;
+		right: 10px;
+		background: black;
+
+	}
+	#tab li{
+		width: 20px;
+		height: 30px;
+		margin-right: 2px solid;
+		text-align: center;
+		color: white;
+		line-height: 30px;
+		float: left;
+	}
+	#arrows{
+		width: 50px;
+		height: 40px;
+		position: absolute;
+		bottom: 1px;
+		left: 10px;
+	}
+	#left,#right{
+		width: 20px;
+		height: 20px;
+		display: inline-block;
+		background: black;
+		color: white;
+		line-height: 20px;
+		text-align: center;
+	}
+	.li1{
+		background:red;
+	}
+	</style>
+</head>
+<body>
+	<div id="contain">
+		<div id="imgs">
+			<div><img src="img/1.jpg" class="img1"></div>
+			<div><img src="img/2.jpg"></div>
+			<div><img src="img/3.jpg"></div>
+			<div><img src="img/4.jpg"></div>
+		</div>
+		<ul id="tab">
+			<li class="li1">1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+		</ul>
+		<div id="arrows">
+			<span id='left'>&lt</span>
+			<span id="right">&gt</span>
+		</div>
+	</div>
+	<script>
+		var oContain=document.getElementById('contain');
+		var oImg=document.getElementById('imgs');
+		var aImg=oImg.getElementsByTagName('img');
+		var oTab=document.getElementById('tab');
+		var aLi=oTab.getElementsByTagName('li');
+		var oLeft=document.getElementById('left');
+		var oRight=document.getElementById('right');
+		var nowindex=0;
+		for(var i=0;i<aLi.length;i++){
+			aLi[i].index=i;
+			aLi[i].onmouseover=function(){
+				var noeindex=this.index;
+				for(var j=0;j<aLi.length;j++){
+					aLi[j].style.background="black";
+					aImg[j].style.display="none";
+				}
+				this.style.background="red";
+				aImg[this.index].style.display='block';
+			};
+		}
+		oLeft.onclick=oRight.onclick=function(){
+			if(this==oLeft){
+				nowindex--;
+				if(nowindex==-1){
+					nowindex=3;
+				}
+				for(var j=0;j<aLi.length;j++){
+					aLi[j].style.background="black";
+					aImg[j].style.display="none";
+				}
+				aLi[nowindex].style.background="red";
+				aImg[nowindex].style.display='block';
+			}
+			else {
+				nowindex++;
+				if(nowindex==4){
+					nowindex=0;
+				}
+				for(var j=0;j<aLi.length;j++){
+					aLi[j].style.background="black";
+					aImg[j].style.display="none";
+				}
+				aLi[nowindex].style.background="red";
+				aImg[nowindex].style.display='block';
+			}
+		};
+		var timer=setInterval(function(){
+			oRight.onclick();
+		},800);
+		oContain.onmouseover=function(){
+			clearInterval(timer);
+		};
+		oContain.onmouseout=function(){
+			 timer=setInterval(function(){
+			oRight.onclick();
+			},800);
+		};
+	</script>
+</body>
+</html>

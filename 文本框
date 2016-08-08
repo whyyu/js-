@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<style>
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	th{
+		width: 200px;
+		height: 10px;
+	}
+	</style>`
+</head>
+<body>
+	<table border="1px solid black">
+		<tr>
+			<th colspan="2">点击表格可编辑</th>
+		</tr>
+		<tr>
+			<th>学号</th>
+			<th>姓名</th>
+		</tr>
+		<tr>
+			<th>1</th>
+			<th>张三</th>
+		</tr>
+		<tr>
+			<th>2</th>
+			<th>李四</th>
+		</tr>
+		<tr>
+			<th>3</th>
+			<th>张五</th>
+		</tr>
+		<tr>
+			<th>4</th>
+			<th>李六</th>
+		</tr>
+	</table>
+</body>
+<script src="jquery-1.12.4.js"></script>
+<script>
+	$(function(){
+		$('th').on('click',function(){
+			if($(this).children('input').length>0){
+				return false;
+			}
+			var $input=$('<input type="text" value='+this.innerHTML+'> ').css({
+								border:0,
+				width:this.offsetWidth
+
+			});
+					$(this).empty().append($input);
+					$input.trigger('select');
+					console.log($input.width());
+					console.log($input.height());
+		});
+
+
+	});
+</script>
+</html>

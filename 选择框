@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title></title>
+	<meta charset="utf-8">
+</head>
+<body>
+	<div id="container">
+		<form action="">
+			<input type="checkbox" name="xingqu">足球</input>
+			<input type="checkbox" name="xingqu">篮球</input>
+			<input type="checkbox" name="xingqu">乒乓球</input>
+			<input type="checkbox" name="xingqu">手球</input>
+		</form>
+		<button id="quanxuan">全选</button>
+		<button id="fanxuan">反选</button>
+		<button id="quanbuxuan">全不选</button>
+	</div>
+	<script src="jquery-1.12.4.js"></script>
+	<script>
+		$(function(){
+			$('#quanxuan').on('click',function(){
+				$('[name]').prop('checked','checked');
+			});
+			$('#quanbuxuan').on('click',function(){
+				$('[name]').prop('checked',false);
+			});
+			$('#fanxuan').on('click',function(){
+				$('[name]').each(function(index,elem){
+					if($(this).prop('checked')){
+						$(this).prop('checked',false);
+					}
+					else if($(this).prop('checked',false)){
+						$(this).prop('checked',true);
+					}
+				})
+			});
+		});
+	</script>
+</body>
+</html>
